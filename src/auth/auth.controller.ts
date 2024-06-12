@@ -14,7 +14,7 @@ export class AuthController {
     login(@Req() req : Request){
         // const user = this.authService.validateUser(authData);
 
-        return req.user;
+        return req.user
     }
 
 

@@ -6,27 +6,30 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const auth_controller_1 = require("./auth/auth.controller");
-const auth_service_1 = require("./auth/auth.service");
-const auth_module_1 = require("./auth/auth.module");
 const mongoose_1 = require("@nestjs/mongoose");
-const user_schema_1 = require("./auth/schemas/user.schema");
+const user_schema_1 = require("./schemas/user.schema");
 const jwt_1 = require("@nestjs/jwt");
-let AppModule = class AppModule {
+const auth_service_1 = require("./auth.service");
+const auth_controller_1 = require("./auth.controller");
+const canstants_1 = require("./canstants");
+let AuthModule = class AuthModule {
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.AuthModule = AuthModule;
+exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule,
-            mongoose_1.MongooseModule.forRoot("mongodb://localhost:27017/ImageProc"),
+        imports: [
             mongoose_1.MongooseModule.forFeature([{ name: "Users", schema: user_schema_1.UserSchema }]),
+            jwt_1.JwtModule.register({
+                secret: canstants_1.jwtConstants.secret,
+                signOptions: {
+                    expiresIn: "60m"
+                }
+            })
         ],
-        controllers: [app_controller_1.AppController, auth_controller_1.AuthController],
-        providers: [app_service_1.AppService, auth_service_1.AuthService, jwt_1.JwtService],
+        providers: [auth_service_1.AuthService],
+        controllers: [auth_controller_1.AuthController]
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], AuthModule);
+//# sourceMappingURL=auth.module.js.map

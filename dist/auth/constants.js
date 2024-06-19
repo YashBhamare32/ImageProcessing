@@ -4,4 +4,4 @@ exports.jwtConstants = void 0;
 exports.jwtConstants = {
     secret: 'yash123'
 };
-//# sourceMappingURL=canstants.js.map
+//# sourceMappingURL=constants.js.map

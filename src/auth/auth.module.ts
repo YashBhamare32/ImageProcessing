@@ -4,7 +4,7 @@ import { UserSchema } from './schemas/user.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { jwtConstants } from './canstants';
+import { jwtConstants } from './constants';
 
 @Module({
     imports:[
@@ -12,7 +12,7 @@ import { jwtConstants } from './canstants';
         JwtModule.register({
             secret:jwtConstants.secret,
             signOptions:{
-                expiresIn:"60m"
+              expiresIn:"60m"
             }
         })
     ],

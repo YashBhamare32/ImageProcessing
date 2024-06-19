@@ -65,4 +65,9 @@ export class AuthService {
 
     return this.jwtService.sign(tokenObj);
   }
+
+  async getUsers():Promise<Object>{
+    const users = this.userModel.findOne({username : 'Yash'});
+    return users;
+  }
 }

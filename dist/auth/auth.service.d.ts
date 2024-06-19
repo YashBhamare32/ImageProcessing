@@ -35,4 +35,5 @@ export declare class AuthService {
     signup(signupBody: SignupDto): Promise<Users>;
     validateUser(loginBody: loginDto): Promise<Users>;
     login(user: Users): Promise<string>;
+    getUsers(): Promise<Object>;
 }

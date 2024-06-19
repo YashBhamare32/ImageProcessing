@@ -72,6 +72,10 @@ let AuthService = class AuthService {
         console.log(tokenObj);
         return this.jwtService.sign(tokenObj);
     }
+    async getUsers() {
+        const users = this.userModel.findOne({ username: 'Yash' });
+        return users;
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([

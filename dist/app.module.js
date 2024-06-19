@@ -13,6 +13,8 @@ const app_service_1 = require("./app.service");
 const auth_module_1 = require("./auth/auth.module");
 const mongoose_1 = require("@nestjs/mongoose");
 const user_schema_1 = require("./auth/schemas/user.schema");
+const job_module_1 = require("./job/job.module");
+const blob_module_1 = require("./blob/blob.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -21,6 +23,8 @@ exports.AppModule = AppModule = __decorate([
         imports: [auth_module_1.AuthModule,
             mongoose_1.MongooseModule.forRoot("mongodb://localhost:27017/ImageProc"),
             mongoose_1.MongooseModule.forFeature([{ name: "Users", schema: user_schema_1.UserSchema }]),
+            job_module_1.JobModule,
+            blob_module_1.BlobModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

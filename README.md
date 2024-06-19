@@ -22,10 +22,10 @@ This project is a NestJS-based API for user authentication and image processing.
       "username": "example",
       "password": "password123",
       "tid": "tenant-id",
-      "oid": "organization-id",
+      "oid": "client-id",
       "aud": "audience",
-      "azp": "authorized-party",
-      "name": "Example User"
+      "azp": "app-id",
+      "name": "names"
     }` 
     
 -   **Response**:

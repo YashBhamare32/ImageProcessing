@@ -33,6 +33,9 @@ let BlobController = class BlobController {
     }
     async uploadImage(image) {
     }
+    async getBlob(params) {
+        return this.blobService.getBlob(params);
+    }
 };
 exports.BlobController = BlobController;
 __decorate([
@@ -43,6 +46,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], BlobController.prototype, "uploadImage", null);
+__decorate([
+    (0, common_1.Get)("/:id"),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], BlobController.prototype, "getBlob", null);
 exports.BlobController = BlobController = __decorate([
     (0, common_1.Controller)('blob'),
     __metadata("design:paramtypes", [blob_service_1.BlobService])

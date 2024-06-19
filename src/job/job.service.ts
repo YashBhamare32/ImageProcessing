@@ -1,12 +1,17 @@
-import { Headers, Injectable, Request } from '@nestjs/common';
+import { Headers, Injectable, NotFoundException, Request } from '@nestjs/common';
 import { JobDto } from './dto/job.dto';
 import { Users } from 'src/auth/schemas/user.schema';
 import { BlobService } from 'src/blob/blob.service';
 import * as fs from "fs";
+import { InjectModel } from '@nestjs/mongoose';
+import { blobSchema } from 'src/auth/schemas/blob.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class JobService {
-    constructor(private blobService : BlobService){}
+    constructor(private blobService : BlobService,
+        @InjectModel(Blob.name) private blobModel: Model<Blob>
+    ){}
     async createJob(image:Express.Multer.File , user:Users ,  headers:any){
 
         //convert to base64 encoding
@@ -19,4 +24,13 @@ export class JobService {
         const res = await this.blobService.storeImage(token , base64Image);
         return res;
     } 
+
+    async getJob(params:any){
+        const id = params.id;
+        const job = await this.blobModel.findOne({id});
+        if(!job){
+            throw new NotFoundException("Job not found in db");
+        }
+        return job;
+    }
 }

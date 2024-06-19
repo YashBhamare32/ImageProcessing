@@ -17,13 +17,15 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 const blob_schema_1 = require("../auth/schemas/blob.schema");
+let jobIdCounter = 1;
 let BlobService = class BlobService {
-    constructor(userModel) {
-        this.userModel = userModel;
+    constructor(blobModel) {
+        this.blobModel = blobModel;
     }
     async storeImage(token, base64Image) {
         try {
-            const newBlob = await this.userModel.create({
+            const newBlob = await this.blobModel.create({
+                id: jobIdCounter++,
                 token,
                 base64Image,
                 status: "PENDING"
@@ -33,6 +35,14 @@ let BlobService = class BlobService {
         catch (error) {
             throw new common_1.BadRequestException(error);
         }
+    }
+    async getBlob(params) {
+        const id = params.id;
+        const blob = await this.blobModel.findOne({ id });
+        if (!blob) {
+            throw new common_1.NotFoundException("Blob not found!!");
+        }
+        return blob;
     }
 };
 exports.BlobService = BlobService;

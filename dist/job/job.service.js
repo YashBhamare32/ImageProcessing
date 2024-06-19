@@ -8,14 +8,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JobService = void 0;
 const common_1 = require("@nestjs/common");
 const blob_service_1 = require("../blob/blob.service");
 const fs = require("fs");
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
 let JobService = class JobService {
-    constructor(blobService) {
+    constructor(blobService, blobModel) {
         this.blobService = blobService;
+        this.blobModel = blobModel;
     }
     async createJob(image, user, headers) {
         const buffer = await fs.promises.readFile(image.path);
@@ -25,10 +31,20 @@ let JobService = class JobService {
         const res = await this.blobService.storeImage(token, base64Image);
         return res;
     }
+    async getJob(params) {
+        const id = params.id;
+        const job = await this.blobModel.findOne({ id });
+        if (!job) {
+            throw new common_1.NotFoundException("Job not found in db");
+        }
+        return job;
+    }
 };
 exports.JobService = JobService;
 exports.JobService = JobService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [blob_service_1.BlobService])
+    __param(1, (0, mongoose_1.InjectModel)(Blob.name)),
+    __metadata("design:paramtypes", [blob_service_1.BlobService,
+        mongoose_2.Model])
 ], JobService);
 //# sourceMappingURL=job.service.js.map

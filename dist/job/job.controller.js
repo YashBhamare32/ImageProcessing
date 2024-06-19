@@ -39,6 +39,10 @@ let JobController = class JobController {
         const user = req.user;
         return this.jobService.createJob(image, user, headers);
     }
+    async getJob(param) {
+        console.log("in get job api");
+        return this.jobService.getJob(param);
+    }
 };
 exports.JobController = JobController;
 __decorate([
@@ -52,6 +56,14 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], JobController.prototype, "createJob", null);
+__decorate([
+    (0, common_1.UseGuards)(auth_gaurd_1.AuthGuard),
+    (0, common_1.Get)("/:id"),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], JobController.prototype, "getJob", null);
 exports.JobController = JobController = __decorate([
     (0, common_1.Controller)('job'),
     __metadata("design:paramtypes", [job_service_1.JobService,

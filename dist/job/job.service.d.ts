@@ -22,15 +22,19 @@
 /// <reference types="mongoose/types/utility" />
 /// <reference types="mongoose/types/validation" />
 /// <reference types="mongoose/types/virtuals" />
-/// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Users } from 'src/auth/schemas/user.schema';
 import { BlobService } from 'src/blob/blob.service';
+import { Model } from 'mongoose';
 export declare class JobService {
     private blobService;
-    constructor(blobService: BlobService);
-    createJob(image: Express.Multer.File, user: Users, headers: any): Promise<import("mongoose").Document<unknown, {}, import("../auth/schemas/blob.schema").Blob> & import("../auth/schemas/blob.schema").Blob & {
+    private blobModel;
+    constructor(blobService: BlobService, blobModel: Model<Blob>);
+    createJob(image: Express.Multer.File, user: Users, headers: any): Promise<import("mongoose").Document<unknown, {}, import("src/auth/schemas/blob.schema").Blob> & import("src/auth/schemas/blob.schema").Blob & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    getJob(params: any): Promise<import("mongoose").Document<unknown, {}, Blob> & Blob & {
         _id: import("mongoose").Types.ObjectId;
     }>;
 }

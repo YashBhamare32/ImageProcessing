@@ -26,9 +26,12 @@
 import { Model } from 'mongoose';
 import { Blob } from 'src/auth/schemas/blob.schema';
 export declare class BlobService {
-    private userModel;
-    constructor(userModel: Model<Blob>);
+    private blobModel;
+    constructor(blobModel: Model<Blob>);
     storeImage(token: string, base64Image: string): Promise<import("mongoose").Document<unknown, {}, Blob> & Blob & {
+        _id: import("mongoose").Types.ObjectId;
+    }>;
+    getBlob(params: any): Promise<import("mongoose").Document<unknown, {}, Blob> & Blob & {
         _id: import("mongoose").Types.ObjectId;
     }>;
 }

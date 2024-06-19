@@ -1,4 +1,4 @@
-import { Body, Controller, Headers, Post, Request, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Headers, Param, Post, Request, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { JobDto } from './dto/job.dto';
 import { Users } from 'src/auth/schemas/user.schema';
 import { AuthGuard } from 'src/auth/auth.gaurd';
@@ -33,5 +33,14 @@ export class JobController {
         const user = req.user as Users;
         
         return this.jobService.createJob(image , user , headers);
+    }
+
+
+    @UseGuards(AuthGuard)
+    @Get("/:id")
+    async getJob(@Param() param:any){
+        console.log("in get job api");
+
+        return this.jobService.getJob(param);
     }
 }

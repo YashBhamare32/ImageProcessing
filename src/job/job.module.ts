@@ -5,6 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/auth/constants';
 import { BlobService } from 'src/blob/blob.service';
 import { BlobModule } from 'src/blob/blob.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { blobSchema } from 'src/auth/schemas/blob.schema';
 
 @Module({
   imports:[JwtModule.register({
@@ -13,7 +15,8 @@ import { BlobModule } from 'src/blob/blob.module';
       expiresIn:"60m"
     }
   }),
-  BlobModule
+  BlobModule,
+  MongooseModule.forFeature([{name:"Blob" , schema:blobSchema}])
 ],
   providers: [JobService],
   controllers: [JobController]

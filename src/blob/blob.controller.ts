@@ -1,4 +1,4 @@
-import { Controller, NotFoundException, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Controller, Get, NotFoundException, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { BlobService } from './blob.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
@@ -22,6 +22,12 @@ export class BlobController {
     @UseInterceptors(FileInterceptor('image' , multerOptions))
     async uploadImage(@UploadedFile() image: Express.Multer.File) {
         
+    }
+
+
+    @Get("/:id")
+    async getBlob(@Param() params:any){
+      return this.blobService.getBlob(params);
     }
 
 }

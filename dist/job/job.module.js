@@ -13,6 +13,8 @@ const job_controller_1 = require("./job.controller");
 const jwt_1 = require("@nestjs/jwt");
 const constants_1 = require("../auth/constants");
 const blob_module_1 = require("../blob/blob.module");
+const mongoose_1 = require("@nestjs/mongoose");
+const blob_schema_1 = require("../auth/schemas/blob.schema");
 let JobModule = class JobModule {
 };
 exports.JobModule = JobModule;
@@ -24,7 +26,8 @@ exports.JobModule = JobModule = __decorate([
                     expiresIn: "60m"
                 }
             }),
-            blob_module_1.BlobModule
+            blob_module_1.BlobModule,
+            mongoose_1.MongooseModule.forFeature([{ name: "Blob", schema: blob_schema_1.blobSchema }])
         ],
         providers: [job_service_1.JobService],
         controllers: [job_controller_1.JobController]

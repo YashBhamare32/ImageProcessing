@@ -34,7 +34,8 @@ export declare class JobController {
     createJob(image: Express.Multer.File, req: any, headers: any): Promise<import("mongoose").Document<unknown, {}, import("../auth/schemas/blob.schema").Blob> & import("../auth/schemas/blob.schema").Blob & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    getJob(param: any): Promise<import("mongoose").Document<unknown, {}, Blob> & Blob & {
-        _id: import("mongoose").Types.ObjectId;
+    getJob(param: any): Promise<{
+        id: number;
+        status: string;
     }>;
 }

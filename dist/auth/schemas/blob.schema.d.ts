@@ -24,16 +24,11 @@
 /// <reference types="mongoose" />
 /// <reference types="mongoose/types/inferschematype" />
 /// <reference types="mongoose/types/inferrawdoctype" />
-export declare enum Status {
-    PENDING = "PENDING",
-    SUCCESS = "SUCCESS",
-    FAILED = "FAILED"
-}
 export declare class Blob {
     id: number;
     token: string;
     base64Image: string;
-    status: Status;
+    status: string;
 }
 export declare const blobSchema: import("mongoose").Schema<Blob, import("mongoose").Model<Blob, any, any, any, import("mongoose").Document<unknown, any, Blob> & Blob & {
     _id: import("mongoose").Types.ObjectId;

@@ -4,7 +4,7 @@ import { Users } from 'src/auth/schemas/user.schema';
 import { BlobService } from 'src/blob/blob.service';
 import * as fs from "fs";
 import { InjectModel } from '@nestjs/mongoose';
-import { blobSchema } from 'src/auth/schemas/blob.schema';
+import { Blob, blobSchema } from 'src/auth/schemas/blob.schema';
 import { Model } from 'mongoose';
 
 @Injectable()
@@ -22,15 +22,21 @@ export class JobService {
         console.log(token);
 
         const res = await this.blobService.storeImage(token , base64Image);
+
+        await fs.promises.unlink(image.path);
         return res;
     } 
 
     async getJob(params:any){
         const id = params.id;
-        const job = await this.blobModel.findOne({id});
+        const job:Blob = await this.blobModel.findOne({id});
         if(!job){
             throw new NotFoundException("Job not found in db");
         }
-        return job;
+        console.log(job);
+        return {
+            id: job.id,
+            status:job.status
+        };
     }
 }

@@ -26,15 +26,17 @@
 /// <reference types="mongoose/types/inferrawdoctype" />
 import { Users } from 'src/auth/schemas/user.schema';
 import { BlobService } from 'src/blob/blob.service';
+import { Blob } from 'src/auth/schemas/blob.schema';
 import { Model } from 'mongoose';
 export declare class JobService {
     private blobService;
     private blobModel;
     constructor(blobService: BlobService, blobModel: Model<Blob>);
-    createJob(image: Express.Multer.File, user: Users, headers: any): Promise<import("mongoose").Document<unknown, {}, import("src/auth/schemas/blob.schema").Blob> & import("src/auth/schemas/blob.schema").Blob & {
+    createJob(image: Express.Multer.File, user: Users, headers: any): Promise<import("mongoose").Document<unknown, {}, Blob> & Blob & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    getJob(params: any): Promise<import("mongoose").Document<unknown, {}, Blob> & Blob & {
-        _id: import("mongoose").Types.ObjectId;
+    getJob(params: any): Promise<{
+        id: number;
+        status: string;
     }>;
 }

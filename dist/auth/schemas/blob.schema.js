@@ -9,14 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.blobSchema = exports.Blob = exports.Status = void 0;
+exports.blobSchema = exports.Blob = void 0;
 const mongoose_1 = require("@nestjs/mongoose");
-var Status;
-(function (Status) {
-    Status["PENDING"] = "PENDING";
-    Status["SUCCESS"] = "SUCCESS";
-    Status["FAILED"] = "FAILED";
-})(Status || (exports.Status = Status = {}));
 let Blob = class Blob {
 };
 exports.Blob = Blob;

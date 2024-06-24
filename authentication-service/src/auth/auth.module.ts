@@ -8,6 +8,7 @@ import { jwtConstants } from './constants';
 
 @Module({
     imports:[
+        MongooseModule.forRoot("mongodb://localhost:27017/ImageProcMicro"),
         MongooseModule.forFeature([{name : "Users" , schema : UserSchema}]),
         JwtModule.register({
             secret:jwtConstants.secret,

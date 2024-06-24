@@ -7,11 +7,16 @@ import { InjectModel } from '@nestjs/mongoose';
 // import { Blob, blobSchema } from 'src/auth/schemas/blob.schema';
 import { Model } from 'mongoose';
 import { ClientProxy } from '@nestjs/microservices';
+import {HttpService } from "@nestjs/axios";
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 export class JobService {
-    constructor(@Inject("BLOB_SERVICE") private readonly blobServiceClient : ClientProxy){}
-    async createJob(image:Express.Multer.File , user:Users ,  headers:any){
+    constructor(@Inject("BLOB_SERVICE") private readonly blobServiceClient : ClientProxy,
+    private readonly httpService : HttpService
+    
+){}
+    async createJob(image:Express.Multer.File , headers:any){
 
         //convert to base64 encoding
         const buffer = await fs.promises.readFile(image.path);
@@ -19,14 +24,17 @@ export class JobService {
 
         const token = headers.authorization.split(' ')[1];
         console.log(token);
-
+        const res = await lastValueFrom(
+            this.httpService.post('http://localhost:3002/blob', { base64Image, token })
+          );
+        console.log(res.data);
+        return res.data;
         // const res = await this.blobService.storeImage(token , base64Image);
 
         // await fs.promises.unlink(image.path);
-        return this.blobServiceClient.send({ cmd : "storeImage" } , {token , base64Image}).toPromise();
     } 
 
-    async getJob(params:any){
+    async getJob(id:any){
         // const id = params.id;
         // const job:Blob = await this.blobModel.findOne({id});
         // if(!job){
@@ -38,6 +46,6 @@ export class JobService {
         //     status:job.status
         // };
 
-        return this.blobServiceClient.send({cmd: 'getBlob'} , {params}).toPromise();
+        return this.blobServiceClient.send({cmd: 'getBlob'} , id).toPromise();
     }
 }

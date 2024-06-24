@@ -11,13 +11,13 @@ export class BlobService {
         @InjectModel(Blob.name) private blobModel: Model<Blob>
     ){}
     
-    async storeImage(token:string , base64Image:string){
+    async storeImage(base64Image:string , token:string){
         
         try {
             const newBlob = await this.blobModel.create({
                 id:jobIdCounter++,
-                token,
                 base64Image,
+                token,
                 status : "PENDING"
             }); 
             return newBlob;
@@ -27,8 +27,8 @@ export class BlobService {
         }
     }
 
-    async getBlob(params:any){
-        const id = params.id;
+    async getBlob(id:any){
+        console.log(id);
         const blob = await this.blobModel.findOne({id});
         if(!blob){
             throw new NotFoundException("Blob not found!!");

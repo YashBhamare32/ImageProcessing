@@ -1,11 +1,9 @@
-import { Body, Controller, Get, Headers, Param, Post, Request, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
-// import { JobDto } from './dto/job.dto';
-// import { Users } from 'src/auth/schemas/user.schema';
-// import { AuthGuard } from 'src/auth/auth.gaurd';
-// import { BlobService } from 'src/blob/blob.service';
+import { Body, Controller, Get, Headers, Param, Post, Request, Res, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 import { JobService } from './job.service';
+import { Response } from 'express';
 
 const multerOptions: MulterOptions = {
     dest: 'tmp/', // Set the destination for temporary uploaded files
@@ -21,7 +19,6 @@ const multerOptions: MulterOptions = {
 @Controller('job')
 export class JobController {
     constructor(private jobService : JobService,
-        // private blobService : BlobService
     ){}
 
     // @UseGuards(AuthGuard)
@@ -36,9 +33,10 @@ export class JobController {
 
     // @UseGuards(AuthGuard)
     @Get("/:id")
-    async getJob(@Param('id') id:any){
+    async getJobStatus(@Param() params:any , @Res() res:Response){
+        const id = params.id;
         console.log("in get job api");
 
-        return this.jobService.getJob(id);
+        return this.jobService.getJobStatus(id , res);
     }
 }

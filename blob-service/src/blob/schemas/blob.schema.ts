@@ -12,7 +12,7 @@ export class Blob{
     token : string
 
     @Prop()
-    base64Image : string
+    base64 : string
 
     @Prop()
     status : string

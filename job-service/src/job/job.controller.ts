@@ -4,9 +4,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 import { JobService } from './job.service';
 import { Response } from 'express';
+import { AuthGuard } from './auth.guard';
 
 const multerOptions: MulterOptions = {
-    dest: 'tmp/', // Set the destination for temporary uploaded files
+    dest: 'tmp/',
     fileFilter: (req, file, cb) => {
       if (file.mimetype.startsWith('image/')) {
         cb(null, true);
@@ -21,7 +22,7 @@ export class JobController {
     constructor(private jobService : JobService,
     ){}
 
-    // @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Post('/')
     @UseInterceptors(FileInterceptor('image' , multerOptions))
     async createJob(@UploadedFile() image:Express.Multer.File , @Headers() headers:any){
@@ -31,7 +32,7 @@ export class JobController {
     }
 
 
-    // @UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Get("/:id")
     async getJobStatus(@Param() params:any , @Res() res:Response){
         const id = params.id;

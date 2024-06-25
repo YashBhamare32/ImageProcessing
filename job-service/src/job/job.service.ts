@@ -24,7 +24,7 @@ export class JobService {
         console.log(token);
 
         const config: AxiosRequestConfig = {
-            url : "http://localhost:3002/blob",
+            url : "http://localhost:3002/api/v1/blob",
             method : "post",
             data : {base64 , token},
           };
@@ -40,7 +40,7 @@ export class JobService {
     async getJobStatus(id:any , res:Response){
         console.log(id);
         const config: AxiosRequestConfig = {
-            url : "http://localhost:3002/blob/"+id,
+            url : "http://localhost:3002/api/v1/blob/"+id,
             method : "get",
           };
         try {

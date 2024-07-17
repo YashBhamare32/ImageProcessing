@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Users } from './schemas/user.schema';
 import { SignupDto } from './dto/signup.dto';
 import { loginDto } from './dto/login.dto';
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class AuthService {
@@ -21,9 +22,12 @@ export class AuthService {
       throw new BadRequestException("User already exists");
     }
 
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password , salt);
+
     const newUser = new this.userModel({
       username,
-      password,
+      password:hashedPassword,
       tid,
       oid,
       aud,
@@ -42,7 +46,7 @@ export class AuthService {
     try {
         const {username , password} = loginBody;
         const user = await this.userModel.findOne({username});
-        if(user && user.password === password){
+        if(user && (await bcrypt.compare(password , user.password))){
             return user;
         }else{
             throw new UnauthorizedException("Invalid credentials");

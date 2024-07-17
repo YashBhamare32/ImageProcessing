@@ -7,7 +7,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { HttpModule } from '@nestjs/axios';
 // import { blobSchema } from 'src/auth/schemas/blob.schema';
-import { jwtConstants } from './constants';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
@@ -18,7 +17,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     }),
     ClientsModule.register([{name : "BLOB_SERVICE" , transport: Transport.TCP , options: {host:"blob-service" , port:3002} }]),
     JwtModule.register({
-    secret:jwtConstants.secret,
+    secret:"yash123",
     signOptions:{
       expiresIn:"60m"
     },

@@ -30,7 +30,7 @@ export class BlobController {
         return this.blobService.storeImage(base64 , token)
     }
 
-    @UseGuards(AuthGuard)
+    
     @Get("/:id")
     async getBlob(@Param() params:any , @Res() res : Response){
       const id = params.id;

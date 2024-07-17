@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Response } from 'express';
 
-let jobIdCounter =1;
+
 @Injectable()
 export class BlobService {
     constructor(
@@ -15,6 +15,10 @@ export class BlobService {
     async storeImage(base64:string , token:string){
         
         try {
+            //fetch all entries and get its count to assign a unique id
+            let jobIdCounter = (await this.blobModel.find({})).length;
+            console.log(jobIdCounter);
+
             const newBlob = await this.blobModel.create({
                 id:jobIdCounter++,
                 base64,

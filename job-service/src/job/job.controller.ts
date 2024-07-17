@@ -25,6 +25,7 @@ export class JobController {
     @UseGuards(AuthGuard)
     @Post('/')
     @UseInterceptors(FileInterceptor('image' , multerOptions))
+    
     async createJob(@UploadedFile() image:Express.Multer.File , @Headers() headers:any){
         console.log("In job api");
                 

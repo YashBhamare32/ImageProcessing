@@ -4,14 +4,13 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UserSchema } from './schemas/user.schema';
-import { jwtConstants } from './constants';
 
 @Module({
     imports:[
-        MongooseModule.forRoot("mongodb://localhost:27017/ImageProcMicro"),
+        MongooseModule.forRoot("mongodb+srv://user01:user01@cluster0.enjinep.mongodb.net/ptc-microserviceYash"),
         MongooseModule.forFeature([{name : "Users" , schema : UserSchema}]),
         JwtModule.register({
-            secret:jwtConstants.secret,
+            secret:"yash123",
             signOptions:{
               expiresIn:"60m"
             }

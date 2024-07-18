@@ -10,7 +10,7 @@ import { Response } from 'express';
 
 @Injectable()
 export class JobService {
-    constructor(@Inject("BLOB_SERVICE") private readonly blobServiceClient : ClientProxy,
+    constructor(@Inject("JOB_SERVICE") private readonly blobServiceClient : ClientProxy,
     private readonly httpService : HttpService
     
 ){}
@@ -29,9 +29,11 @@ export class JobService {
             data : {base64 , token},
           };
         try {
-            const res = await this.httpService.axiosRef.request(config);
-            console.log(res.data);
-            return res.data;
+            // const res = await this.httpService.axiosRef.request(config);
+            // console.log(res.data);
+            const res = await this.blobServiceClient.emit("job_created" , {base64 , token});
+            console.log(res);
+            return res;
         } catch (error) {
             throw new Error(error);
         }

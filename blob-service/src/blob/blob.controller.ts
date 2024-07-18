@@ -5,6 +5,7 @@ import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer
 import * as fs from 'fs';
 import { Response } from 'express';
 import { AuthGuard } from './auth.guard';
+import { EventPattern, Payload } from '@nestjs/microservices';
 
 const multerOptions: MulterOptions = {
     dest: 'tmp/', // Set the destination for temporary uploaded files
@@ -22,11 +23,12 @@ export class BlobController {
     constructor(private blobService : BlobService){}
 
     @Post()
-    @UseInterceptors(FileInterceptor('image' , multerOptions))
-    async uploadImage(@Body() req) {
+    // @UseInterceptors(FileInterceptor('image' , multerOptions))
+    @EventPattern("job_created")
+    async uploadImage(@Payload() req) {
         const token = req.token;
         const base64 = req.base64;
-        
+        console.log(token)
         return this.blobService.storeImage(base64 , token)
     }
 

@@ -10,7 +10,16 @@ import { HttpModule } from '@nestjs/axios';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
-  imports:[
+  imports:[ClientsModule.register([
+    {
+      name:"JOB_SERVICE",
+      transport: Transport.RMQ,
+      options:{
+        urls:['amqp://localhost:5672'],
+        queue:'job_queue'
+      }
+    }
+  ]),
     HttpModule.register({
       timeout:5000,
       maxRedirects:5

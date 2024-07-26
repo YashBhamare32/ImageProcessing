@@ -1,0 +1,15 @@
+services:
+
+  job-image:
+    build: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/job-service
+    # dockerfile: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/job-service/Dockerfile
+    command: npm run start:dev job-service
+
+
+    ports:
+      - '3000:3000'
+
+networks:
+  bobby-network:
+    driver: bridge
+    name: bobby-network

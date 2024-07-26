@@ -4,25 +4,27 @@ import * as crypto from "crypto";
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Response } from 'express';
+import { BlobSchema } from './schemas/blob.schema';
+import {InjectRepository} from "@nestjs/typeorm";
+import {Repository} from "typeorm";
 
 
 @Injectable()
 export class BlobService {
     constructor(
-        @InjectModel(Blob.name) private blobModel: Model<Blob>
+        @InjectRepository(BlobSchema) private readonly blobRepository: Repository<BlobSchema>,
     ){}
     
     async storeImage(base64:string , token:string){
         
         try {
             //fetch all entries and get its count to assign a unique id
-            let jobIdCounter = (await this.blobModel.find({})).length;
-            console.log(jobIdCounter);
 
-            const newBlob = await this.blobModel.create({
-                id:jobIdCounter++,
-                base64,
+            console.log(token)
+
+            const newBlob = await this.blobRepository.save({
                 token,
+                base64,
                 status : "PENDING"
             }); 
             return newBlob;
@@ -35,7 +37,7 @@ export class BlobService {
     async getBlob(id:any , res:Response){
         console.log(id);
         try {
-            const blob = await this.blobModel.findOne({ id });
+            const blob = await this.blobRepository.findOneBy({ id });
             if (!blob) {
                 return res.status(404).json({
                     msg: "Blob not found with given id",

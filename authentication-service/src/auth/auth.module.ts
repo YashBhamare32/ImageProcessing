@@ -1,14 +1,23 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
-import { UserSchema } from './schemas/user.schema';
+import {TypeOrmModule} from "@nestjs/typeorm";
+import {UserSchema} from "./schemas/user.schema";
 
 @Module({
     imports:[
-        MongooseModule.forRoot("mongodb+srv://user01:user01@cluster0.enjinep.mongodb.net/ptc-microserviceYash"),
-        MongooseModule.forFeature([{name : "Users" , schema : UserSchema}]),
+        TypeOrmModule.forRoot({
+            type: 'postgres',
+            host: 'localhost',
+            port: 5433,
+            username: 'postgres',
+            password: 'Bobby@2032',
+            database: 'ImageProcessing',
+            entities: [UserSchema],
+            synchronize: true,
+        }),
+        TypeOrmModule.forFeature([UserSchema]),
         JwtModule.register({
             secret:"yash123",
             signOptions:{
@@ -17,6 +26,7 @@ import { UserSchema } from './schemas/user.schema';
         })
     ],
     providers:[AuthService],
-    controllers:[AuthController]
+    controllers:[AuthController],
+    exports:[AuthService , TypeOrmModule]
 })
 export class AuthModule {}

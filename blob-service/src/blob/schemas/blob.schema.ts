@@ -1,20 +1,16 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Schema({
-    timestamps:true
-})
-
-export class Blob{
-    @Prop()
+@Entity()
+export class BlobSchema{
+    @PrimaryGeneratedColumn('increment')
     id : number
 
-    @Prop()
+    @Column({type:'text'})
     token : string
 
-    @Prop()
+    @Column({type:'text'})
     base64 : string
 
-    @Prop()
+    @Column({type:'varchar' , length:100})
     status : string
 };
-export const blobSchema = SchemaFactory.createForClass(Blob);

@@ -26,7 +26,7 @@ export class JobService {
         const config: AxiosRequestConfig = {
             url : "http://localhost:3002/api/v1/blob",
             method : "post",
-            data : {base64 , token},
+            data : {token , base64},
           };
         try {
             const res = await this.httpService.axiosRef.request(config);

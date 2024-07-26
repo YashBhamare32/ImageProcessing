@@ -1,0 +1,13 @@
+services:
+  blob-image:
+    build: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/blob-service
+    # dockerfile: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/blob-service/Dockerfile
+    command: npm run start:dev blob-service
+
+    ports:
+      - '3002:3002'
+
+networks:
+  bobby-network:
+    name: bobby-network
+    external: true

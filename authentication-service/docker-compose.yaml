@@ -1,7 +1,0 @@
-services:
-  auth-image:
-    build: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/authentication-service
-    # dockerfile: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/authentication-service/Dockerfile
-    command: npm run start:dev authentication-service
-    ports:
-      - '3001:3001'

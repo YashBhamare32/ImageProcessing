@@ -15,7 +15,7 @@ import {BlobSchema} from "./schemas/blob.schema";
       password: 'Bobby@2032',
       database: 'ImageProcessing',
       entities: [BlobSchema],
-      synchronize: true,
+      synchronize: false,
     }),
       TypeOrmModule.forFeature([BlobSchema]),
     JwtModule.register({

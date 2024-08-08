@@ -15,7 +15,7 @@ import {UserSchema} from "./schemas/user.schema";
             password: 'Bobby@2032',
             database: 'ImageProcessing',
             entities: [UserSchema],
-            synchronize: true,
+            synchronize: false,
         }),
         TypeOrmModule.forFeature([UserSchema]),
         JwtModule.register({

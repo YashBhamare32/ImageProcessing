@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="ybhamare">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user">
+            <column name="id" type="int"  autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tid" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="oid" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="aud" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="azp" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="text"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="ybhamare">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="blob"/>
+            </not>
+        </preConditions>
+        <createTable tableName="blob">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="token" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="base64" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

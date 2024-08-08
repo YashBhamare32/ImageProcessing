@@ -1,6 +1,6 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
-@Entity()
+@Entity('blob')
 export class BlobSchema{
     @PrimaryGeneratedColumn('increment')
     id : number

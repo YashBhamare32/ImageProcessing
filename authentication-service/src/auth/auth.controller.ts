@@ -41,9 +41,9 @@ export class AuthController {
 
     //Used for testing Guards
     // @UseGuards(AuthGuard)
-    // @Get('getUsers')
-    // async getUsers(){
-    //     const users = await this.authService.getUsers();
-    //     return users;
-    // }
+    @Get('getUsers')
+    async getUsers(){
+        const users = await this.authService.getUsers();
+        return users;
+    }
 }

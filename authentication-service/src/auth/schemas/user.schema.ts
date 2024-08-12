@@ -1,30 +1,28 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import {Column, Entity, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
 
-@Schema({
-  timestamps: true,
-})
-export class Users extends Document {
-  @Prop({ required: true , unique : true})
+@Entity('user')
+export class UserSchema{
+  @PrimaryColumn({name: 'id' , type:"uuid" , default:()=> 'gen_random_uuid()'})
+  id: string;
+
+  @Column()
   username: string;
 
-  @Prop({ required: true })
+  @Column({ type: "varchar" , length : 100})
   password: string;
 
-  @Prop({ required: true })
+  @Column({ type: "varchar" , length : 100})
   tid: string;
 
-  @Prop({ required: true })
+  @Column({ type: "varchar" , length : 100})
   oid: string;
 
-  @Prop({ required: true })
+  @Column({ type: "varchar" , length : 100})
   aud: string;
 
-  @Prop({ required: true })
+  @Column({ type: "varchar" , length : 100})
   azp: string;
 
-  @Prop({ type: [String], required: true })
+  @Column('simple-array')
   name: string[];
 }
-
-export const UserSchema = SchemaFactory.createForClass(Users);

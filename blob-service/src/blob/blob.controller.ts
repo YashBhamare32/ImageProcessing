@@ -26,7 +26,7 @@ export class BlobController {
     async uploadImage(@Body() req) {
         const token = req.token;
         const base64 = req.base64;
-        
+        console.log(token);
         return this.blobService.storeImage(base64 , token)
     }
 

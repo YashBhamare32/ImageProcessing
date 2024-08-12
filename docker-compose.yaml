@@ -1,0 +1,74 @@
+
+services:
+  blob-image:
+    build: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/blob-service
+    # dockerfile: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/blob-service/Dockerfile
+    command: npm run start:dev blob-service
+
+    networks:
+      - image-network
+    ports:
+      - '3002:3002'
+
+  job-image:
+    build: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/job-service
+    # dockerfile: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/job-service/Dockerfile
+    command: npm run start:dev job-service
+
+    networks:
+      - image-network
+    ports:
+      - '3000:3000'
+
+  auth-image:
+    build: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/authentication-service
+
+    networks:
+      - image-network
+    command: npm run start:dev authentication-service
+    ports:
+      - '3001:3001'
+
+  rabbitmq:
+    image: rabbitmq
+    networks:
+      - image-network
+    ports:
+      - '5672:5672'
+
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - '5432:5432'
+    container_name: 'postgres'
+    networks:
+      - image-network
+    environment:
+        - POSTGRES_PASSWORD=Bobby@2032
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=ImageProcessing
+    volumes:
+      - ./scripts/initdb.sh:/docker-entrypoint-initdb.d/init-db.sh
+
+  liquibase:
+    build:
+      context: /Users/ybhamare/Library/CloudStorage/OneDrive-PTC/Attachments/ImageProcessing/Liquibase
+
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Bobby@2032
+      - POSTGRES_DB=ImageProcessing
+    depends_on:
+      - postgres
+    networks:
+      - image-network
+  
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  image-network:
+    driver: bridge

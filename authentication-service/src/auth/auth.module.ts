@@ -16,6 +16,7 @@ import {UserSchema} from "./schemas/user.schema";
             database: 'ImageProcessing',
             entities: [UserSchema],
             synchronize: false,
+            uuidExtension:'pgcrypto'
         }),
         TypeOrmModule.forFeature([UserSchema]),
         JwtModule.register({

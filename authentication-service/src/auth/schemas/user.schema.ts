@@ -1,9 +1,9 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, PrimaryColumn, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity('user')
 export class UserSchema{
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryColumn({name: 'id' , type:"uuid" , default:()=> 'gen_random_uuid()'})
+  id: string;
 
   @Column()
   username: string;

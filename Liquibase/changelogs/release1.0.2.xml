@@ -12,8 +12,8 @@
             </not>
         </preConditions>
         <createTable tableName="user">
-            <column name="id" type="int"  autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
+            <column name="id" type="uuid">
+                <constraints primaryKey="true"/>
             </column>
             <column name="username" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -35,6 +35,11 @@
             </column>
             <column name="name" type="text"/>
         </createTable>
+
+        <sql>
+            ALTER TABLE "user" ALTER COLUMN id SET DEFAULT gen_random_uuid();
+        </sql>
+
     </changeSet>
 
     <changeSet id="2" author="ybhamare">

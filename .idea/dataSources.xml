@@ -8,11 +8,11 @@
       <jdbc-url>mongodb://localhost:27017</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="ImageProcessing@localhost" uuid="67f5cc14-a34e-4079-b99e-9b6df1e864e4">
+    <data-source source="LOCAL" name="email-notifications-service-local-dev@localhost" uuid="650600e6-b8ef-4973-a718-d02203683187">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/ImageProcessing</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/email-notifications-service-local-dev</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

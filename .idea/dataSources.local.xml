@@ -12,8 +12,8 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
-    <data-source name="ImageProcessing@localhost" uuid="67f5cc14-a34e-4079-b99e-9b6df1e864e4">
-      <database-info product="PostgreSQL" version="14.13" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="14.13" exact-driver-version="42.6">
+    <data-source name="email-notifications-service-local-dev@localhost" uuid="650600e6-b8ef-4973-a718-d02203683187">
+      <database-info product="PostgreSQL" version="14.12" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="14.12" exact-driver-version="42.6">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />

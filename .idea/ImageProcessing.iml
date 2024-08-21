@@ -5,6 +5,9 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources/650600e6-b8ef-4973-a718-d02203683187" />
+      <excludeFolder url="file://$MODULE_DIR$/blob-service/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/job-service/tmp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
